@@ -26,6 +26,13 @@ gameRect = pygame.Rect(rectX, rectY, rectWidth, rectHeight)
 
 rectSpeed = 50
 
+#creating a Title
+def render_title():
+  font = pygame.font.Font(None,100)
+  title = font.render('TITLE',True,(0,0,0))
+  surface.blit(title,(140,20))
+
+
 def move_rect(Rect):
   keys = pygame.key.get_pressed()
   if keys[pygame.K_LEFT] and Rect.left > 0:
@@ -50,5 +57,6 @@ while True:
   for i in range(4):
     for j in range(4):
       pygame.draw.rect(surface, rectColor, gameBoard[i][j])
-  
+
+  render_title()
   pygame.display.update()
