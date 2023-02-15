@@ -25,4 +25,4 @@ def render_loop(rect):
 def render_title():
   font = pygame.font.Font(None,100)
   title = font.render('2048',True,(0,0,0))
-  surface.blit(title,(140,20))
+  surface.blit(title,(170,20))
