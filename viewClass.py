@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame
 
 # Size of window
 SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = 500, 600
@@ -6,12 +6,9 @@ SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = 500, 600
 # Screen Color
 screenColor = (190, 172, 158)
 rectColor = (210, 195, 179)
-rectSize = rectWidth, rectHeight = 100, 100
-rectPos = rectX, rectY = 100, 100
 
 pygame.init()
 # pygame.display.init()
-gameBoard = {}
 
 for x in range(4):
   gameBoard[x] = {}
@@ -60,3 +57,5 @@ while True:
 
   render_title()
   pygame.display.update()
+
+surface = pygame.display.set_mode(SCREEN_SIZE)
