@@ -1,5 +1,7 @@
 import pygame, sys
-import modelClass, viewClass, controllerClass
+from viewClass import render_loop
+from modelClass import gameBoard
+import viewClass, controllerClass
 
 # Game Loop
 while True:
@@ -8,11 +10,5 @@ while True:
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
-  
-  viewClass.surface.fill(viewClass.screenColor)
-  for i in range(4):
-    for j in range(4):
-      pygame.draw.rect(viewClass.surface, viewClass.rectColor, modelClass.gameBoard[i][j])
-  
-  viewClass.render_title()
-  pygame.display.update()
+
+  render_loop(gameBoard)

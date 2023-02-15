@@ -11,6 +11,16 @@ pygame.init()
 
 surface = pygame.display.set_mode(SCREEN_SIZE)
 
+# Renderer called by game loop
+def render_loop(rect):
+  surface.fill(screenColor)
+  for i in range(4):
+    for j in range(4):
+      pygame.draw.rect(surface, rectColor, rect[i][j])
+    
+  render_title()
+  pygame.display.update()
+
 #creating a Title
 def render_title():
   font = pygame.font.Font(None,100)
