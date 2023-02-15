@@ -14,4 +14,5 @@ while True:
     for j in range(4):
       pygame.draw.rect(viewClass.surface, viewClass.rectColor, modelClass.gameBoard[i][j])
   
+  viewClass.render_title()
   pygame.display.update()
