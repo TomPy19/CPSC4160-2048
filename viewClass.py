@@ -16,7 +16,7 @@ def render_loop(rect):
   surface.fill(screenColor)
   for i in range(4):
     for j in range(4):
-      pygame.draw.rect(surface, rectColor, rect[i][j])
+      pygame.draw.rect(surface, rect[i][j].color, rect[i][j].rect)
     
   render_title()
   pygame.display.update()

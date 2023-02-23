@@ -1,7 +1,12 @@
 import pygame
 
-def move_rect(Rect):
+def new_rect():
   keys = pygame.key.get_pressed()
+  if keys[pygame.K_SPACE]:
+    return True
+  else :
+    return False
+
   # if keys[pygame.K_LEFT] and Rect.left > 0:
   #   return
   # if keys[pygame.K_RIGHT] and Rect.right < viewClass.SCREEN_WIDTH:
