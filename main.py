@@ -1,18 +1,25 @@
 import pygame, sys
-import modelClass, viewClass, controllerClass
+from viewClass import render_loop
+from modelClass import gameBoard
+from controllerClass import controls, shouldRun
+from modelClass import spawnRect
+
+state = False
 
 # Game Loop
 while True:
 
   for event in pygame.event.get():
+
     if event.type == pygame.QUIT:
       pygame.quit()
       sys.exit()
-  
-  viewClass.surface.fill(viewClass.screenColor)
-  for i in range(4):
-    for j in range(4):
-      pygame.draw.rect(viewClass.surface, viewClass.rectColor, modelClass.gameBoard[i][j])
-  
-  viewClass.render_title()
-  pygame.display.update()
+
+    if controls(event):
+      if shouldRun(state):
+        gameBoard = spawnRect(gameBoard)
+        for x in range(4):
+          for y in range(4):
+            print(f'({x}, {y}): {gameBoard[x][y].value}')
+      
+  render_loop(gameBoard)
