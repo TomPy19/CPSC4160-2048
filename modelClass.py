@@ -29,15 +29,15 @@ for x in range(4):
 def spawnRect(gameBoard):
   notFull = checkFree(gameBoard)
 
-  x = random.choice(range(len(notFull)))
+  x = random.choice(list(notFull.keys()))
 
-  # print(notFull)
-  if len(notFull[x]) >= 1:
-    y = random.choice(range(len(notFull[x])))
+  print(notFull)
+  if notFull[x]:
+    y = random.choice(notFull[x])
   else:
-    y = notFull[0]
+    y = notFull[0][0]
 
-  # print(f'{x}, {y}')
+  print(f'{x}, {y}')
 
   gameBoard[x][y].color = color_2
   gameBoard[x][y].value = 2

@@ -1,8 +1,10 @@
 import pygame, sys
 from viewClass import render_loop
 from modelClass import gameBoard
-from controllerClass import new_rect
+from controllerClass import controls, shouldRun
 from modelClass import spawnRect
+
+state = False
 
 # Game Loop
 while True:
@@ -13,8 +15,11 @@ while True:
       pygame.quit()
       sys.exit()
 
-    if(new_rect()):
-      gameBoard = spawnRect(gameBoard)
-      print(new_rect)
+    if controls(event):
+      if shouldRun(state):
+        gameBoard = spawnRect(gameBoard)
+        for x in range(4):
+          for y in range(4):
+            print(f'({x}, {y}): {gameBoard[x][y].value}')
       
   render_loop(gameBoard)
