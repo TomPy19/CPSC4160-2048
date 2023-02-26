@@ -58,9 +58,31 @@ def checkFree(gameBoard):
 
   return freeSpace
 
+def checkFull(gameBoard):
+  boardFull = True
+  for x in range(4):
+    for y in range(4):
+      if gameBoard[x][y].value == 0:
+        boardFull = False
+  return boardFull
+
+def checkWin(gameBoard):
+  found2048 = False
+  for x in range(4):
+    for y in range(4):
+      if gameBoard[x][y].value == 2048:
+        found2048 = True
+  if found2048:
+    return True
+  else:
+    return False
+        
+        
+        
+
 def gameStart():
-  gameBoard[0][0] = cRectangle(0, 0, rectWidth, rectHeight, color_2, 2)
-  gameBoard[3][0] = cRectangle(3, 0, rectWidth, rectHeight, color_2, 2)
+  spawnRect(gameBoard)
+  spawnRect(gameBoard)
 
     
 

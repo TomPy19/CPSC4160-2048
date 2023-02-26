@@ -7,6 +7,11 @@ SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = 500, 600
 screenColor = (190, 172, 158)
 rectColor = (210, 195, 179)
 
+# Board Specs
+screenWidth = 0
+borderRadius = 20
+rectBorder = 10
+
 pygame.init()
 
 surface = pygame.display.set_mode(SCREEN_SIZE)
@@ -16,11 +21,11 @@ def render_loop(gameBoard):
   numLabel = pygame.font.Font(None,100)
 
   surface.fill(screenColor)
-  pygame.draw.rect(surface, (45,36,26), pygame.Rect(0, 100, 500, 500))
+  pygame.draw.rect(surface, (45,36,26), pygame.Rect(0, 100, 500, 500),screenWidth, borderRadius)
   for i in range(4):
     for j in range(4):
       rect = gameBoard[i][j]
-      pygame.draw.rect(surface, rect.color, rect.rect)
+      pygame.draw.rect(surface, rect.color, rect.rect,0,rectBorder)
       if rect.value is not 0:
         surface.blit(
           numLabel.render(str(rect.value), 
@@ -44,6 +49,8 @@ def render_title():
     ))
   
 rectPos = rectX, rectY = 100, 100
+
+#Movement animation
 def slide(test):
   vel = 5
   for entry in list(test.keys()):
@@ -63,7 +70,7 @@ def slide(test):
         else:
           yi -= vel
       rect = pygame.Rect(xi, yi, 100, 100)
-      pygame.draw.rect(surface, test[entry][0][dir][0].color, rect)
+      pygame.draw.rect(surface, test[entry][0][dir][0].color, rect, 0, rectBorder)
       surface.blit(
         numLabel.render(str(test[entry][0][dir][0].value), 
         True, 
@@ -77,6 +84,22 @@ def slide(test):
       if dir is 'u' or dir is 'd':
         if yi == yf:
           break
+
+#displaying win/lose message
+def hasWon(win):
+  rect = pygame.Rect(SCREEN_WIDTH/4, SCREEN_HEIGHT/2 - 50, 250, 100)
+  pygame.draw.rect(surface, (210, 195, 179), rect, 0, rectBorder)
+  font = pygame.font.Font("ClearSans-Bold.ttf",50)
+  
+  if win == True:
+    message = font.render('You Win!',True,(0,0,0))
+  else:
+    message = font.render('You Lose!',True,(0,0,0))
+
+  surface.blit(message,(rect.x + 20, rect.y + 15) 
+  )
+  pygame.display.update()
+    
       
   
 
