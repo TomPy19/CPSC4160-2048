@@ -58,3 +58,11 @@ def checkFree(gameBoard):
 
   return freeSpace
 
+def gameStart():
+  gameBoard[0][0] = cRectangle(0, 0, rectWidth, rectHeight, color_2, 2)
+  gameBoard[3][0] = cRectangle(3, 0, rectWidth, rectHeight, color_2, 2)
+
+    
+
+
+
