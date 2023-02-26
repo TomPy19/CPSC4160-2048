@@ -12,17 +12,33 @@ pygame.init()
 surface = pygame.display.set_mode(SCREEN_SIZE)
 
 # Renderer called by game loop
-def render_loop(rect):
+def render_loop(gameBoard):
+  numLabel = pygame.font.Font(None,100)
+
   surface.fill(screenColor)
+  pygame.draw.rect(surface, (45,36,26), pygame.Rect(0, 100, 500, 500))
   for i in range(4):
     for j in range(4):
-      pygame.draw.rect(surface, rectColor, rect[i][j])
+      rect = gameBoard[i][j]
+      pygame.draw.rect(surface, rect.color, rect.rect)
+      if rect.value is not 0:
+        surface.blit(
+          numLabel.render(str(rect.value), 
+          True, 
+          (0,0,0)), 
+          (rect.rect.x+30, rect.rect.y+20)
+          )
+        
     
   render_title()
   pygame.display.update()
 
 #creating a Title
 def render_title():
-  font = pygame.font.Font(None,100)
+  font = pygame.font.Font("ClearSans-Bold.ttf",80)
   title = font.render('2048',True,(0,0,0))
-  surface.blit(title,(170,20))
+
+  surface.blit(title,(
+    (SCREEN_WIDTH / 2) - (font.size('2048')[0] / 2),
+    50 - (font.size('2048')[1] / 2)
+    ))
