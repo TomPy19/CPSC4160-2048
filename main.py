@@ -20,6 +20,5 @@ while True:
     if dir != None:
       if shouldRun(state, dir):
         moveList = handleKeypress(dir, gameBoard)
-        print (moveList)
       
   render_loop(gameBoard)

@@ -24,8 +24,6 @@ colors = [
 
 gameBoard = {}
 
-
-
 def spawnRect(gameBoard):
   notFull = checkFree(gameBoard)
 
