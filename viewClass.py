@@ -54,12 +54,12 @@ rectPos = rectX, rectY = 100, 100
 
 #Movement animation
 def slide(test):
-  vel = 5
+  vel = 20
   for entry in list(test.keys()):
-    dir = list(test[entry][0].keys())[0]
-    numLabel = pygame.font.Font(None,100)
-    xi, yi = test[entry][0][dir][0].rect.x, test[entry][0][dir][0].rect.y
-    xf, yf = test[entry][0][dir][1].rect.x, test[entry][0][dir][1].rect.y
+    # print (list(test[str(entry)].keys())[0])
+    dir = list(test[str(entry)].keys())[0]
+    xi, yi = test[str(entry)][dir][0].rect.x, test[str(entry)][dir][0].rect.y
+    xf, yf = test[str(entry)][dir][1].rect.x, test[str(entry)][dir][1].rect.y
     while True:
       if xi != xf:
         if dir is 'r':
@@ -72,12 +72,15 @@ def slide(test):
         else:
           yi -= vel
       rect = pygame.Rect(xi, yi, 100, 100)
-      pygame.draw.rect(surface, test[entry][0][dir][0].color, rect, 0, rectBorder)
-      surface.blit(
-        numLabel.render(str(test[entry][0][dir][0].value), 
-        True, 
-        (0,0,0)), 
-        (rect.x+30, rect.y+20)
+      pygame.draw.rect(surface, test[str(entry)][dir][0].color, rect, 0, rectBorder)
+      if test[str(entry)][dir][0].value != 0:
+        numLabel = pygame.font.Font("ClearSans-Bold.ttf",60-(7*len(str(test[str(entry)][dir][0].value))))
+        surface.blit(
+          numLabel.render(str(test[str(entry)][dir][0].value), 
+          True, 
+          (0,0,0)),
+          (int(test[str(entry)][dir][0].rect.x + (rectWidth / 2) - (numLabel.size(str(test[str(entry)][dir][0].value))[0] / 2)),
+          int(test[str(entry)][dir][0].rect.y + (rectHeight / 2)- (numLabel.size(str(test[str(entry)][dir][0].value))[1] / 2)))
         )
       pygame.display.update()
       if dir is 'r' or dir is 'l':

@@ -66,6 +66,16 @@ def checkFull(gameBoard):
         boardFull = False
   return boardFull
 
+def checkLose(gameBoard, dir):
+  for x in range(4):
+    for y in range(4):
+      c1 = gameBoard[x][y]
+      c2 = getC2(dir, gameBoard, x, y)
+      if c2:
+        if c1.value == c2.value:
+          return False
+  return True
+
 def checkWin(gameBoard):
   found2048 = False
   for x in range(4):
@@ -77,9 +87,6 @@ def checkWin(gameBoard):
   else:
     return False
 
-def gameStart():
-  spawnRect(gameBoard)
-  spawnRect(gameBoard)
 for x in range(4):
   gameBoard[x] = {}
   for y in range(4):
@@ -189,9 +196,9 @@ def moveLeft(gameBoard, moveList, it):
     if it:
       for x in range(4):
         if gameBoard[x][y].value != arr[x]:
-          dest = x+zeros
-          if dest > 3:
-            moveList[f'{len(moveList)}'] = {'l': [gameBoard[x][y], gameBoard[3][y]]}
+          dest = x-zeros
+          if dest < 0:
+            moveList[f'{len(moveList)}'] = {'l': [gameBoard[x][y], gameBoard[0][y]]}
           else:
             moveList[f'{len(moveList)}'] = {'l': [gameBoard[x][y], gameBoard[dest][y]]}
     for x in range(4):
@@ -216,9 +223,9 @@ def moveUp(gameBoard, moveList, it):
     if it:
       for y in range(4):
         if gameBoard[x][y].value != arr[y]:
-          dest = y+zeros
-          if dest > 3:
-            moveList[f'{len(moveList)}'] = {'u': [gameBoard[x][y], gameBoard[x][3]]}
+          dest = y-zeros
+          if dest < 0:
+            moveList[f'{len(moveList)}'] = {'u': [gameBoard[x][y], gameBoard[x][0]]}
           else:
             moveList[f'{len(moveList)}'] = {'u': [gameBoard[x][y], gameBoard[x][dest]]}
     for y in range(4):
