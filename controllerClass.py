@@ -2,24 +2,32 @@ import pygame
 
 def controls(event):
   keys = pygame.key.get_pressed()
-  if keys[pygame.K_SPACE] and (event.type == pygame.KEYDOWN):
-    return True
+  if event.type == pygame.KEYDOWN:
+    if keys[pygame.K_LEFT]:
+      return 'l'
+    if keys[pygame.K_RIGHT]:
+      return 'r'
+    if keys[pygame.K_UP]:
+      return 'u'
+    if keys[pygame.K_DOWN]:
+      return 'd'
   else:
-    return False
+    return None
 
-def shouldRun(state):
-  space = pygame.key.get_pressed()[pygame.K_SPACE]
-  if state and space:
+def shouldRun(state, dir):
+  if dir == 'l':
+    key = pygame.key.get_pressed()[pygame.K_LEFT]
+  if dir == 'r':
+    key = pygame.key.get_pressed()[pygame.K_RIGHT]
+  if dir == 'u':
+    key = pygame.key.get_pressed()[pygame.K_UP]
+  if dir == 'd':
+    key = pygame.key.get_pressed()[pygame.K_DOWN]
+    
+  if state and key:
     return False
-  if not state and space:
+  if not state and key:
     return True
-  if not state and not space:
+  if not state and not key:
     return False
-  # if keys[pygame.K_LEFT] and Rect.left > 0:
-  #   return
-  # if keys[pygame.K_RIGHT] and Rect.right < viewClass.SCREEN_WIDTH:
-  #   return
-  # if keys[pygame.K_UP] and Rect.top > 0:
-  #   return
-  # if keys[pygame.K_DOWN] and Rect.bottom < viewClass.SCREEN_HEIGHT:
-  #   return
+  
