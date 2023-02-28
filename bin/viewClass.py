@@ -13,15 +13,19 @@ screenWidth = 0
 borderRadius = 20
 rectBorder = 10
 
+# Initialize pygame
 pygame.init()
 
+# Set display surface
 surface = pygame.display.set_mode(SCREEN_SIZE)
 
 # Renderer called by game loop
 def render_loop(gameBoard,score,highScore):
 
+  # Fill background color
   surface.fill(screenColor)
   pygame.draw.rect(surface, (45,36,26), pygame.Rect(0, 100, 500, 500),screenWidth, borderRadius)
+  # Display each gameboard cell
   for i in range(4):
     for j in range(4):
       rect = gameBoard[i][j]
@@ -36,10 +40,9 @@ def render_loop(gameBoard,score,highScore):
           int(rect.rect.y + (rectHeight / 2)- (numLabel.size(str(rect.value))[1] / 2)))
         )
         
-    
-  render_title()
-  render_scores(score['score'], highScore)
-  pygame.display.update()
+  render_title() # Render '2048' Title
+  render_scores(score['score'], highScore) # Render current score and high score
+  pygame.display.update() # Update Display
 
 #creating a Title
 def render_title():
@@ -51,6 +54,7 @@ def render_title():
     50 - (font.size('2048')[1] / 2)
     ))
   
+# Display current score and high score
 def render_scores(score,highScore):
   titleFont = pygame.font.Font("bin/fonts/ClearSans-Bold.ttf",20)
   scoreFont = pygame.font.Font("bin/fonts/ClearSans-Regular.ttf",20)
@@ -79,7 +83,7 @@ def render_scores(score,highScore):
     ))
 
 
-#Movement animation
+#Movement animation (Unused)
 def slide(test):
   vel = 20
   for entry in list(test.keys()):
@@ -117,7 +121,7 @@ def slide(test):
         if yi == yf:
           break
 
-#displaying win/lose message
+# Displaying win/lose message
 def hasWon(win):
   rect = pygame.Rect(SCREEN_WIDTH/4, SCREEN_HEIGHT/2 - 50, 250, 100)
   pygame.draw.rect(surface, (210, 195, 179), rect, 0, rectBorder)

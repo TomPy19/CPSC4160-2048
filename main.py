@@ -6,25 +6,28 @@ from bin.modelClass import checkFull,checkWin,checkLose,handleKeypress,startGame
 from importlib import reload
 import bin.keepScore
 
-state = False # Boolean to check if space is being held
-lost = False  # Boolean to check if game has ended in loss
-won = False   # Boolean to check if game has ended in win
-gameStart = True
-highScore = bin.keepScore.highScore
+state = False    # Boolean to check if space is being held
+lost = False     # Boolean to check if game has ended in loss
+won = False      # Boolean to check if game has ended in win
+gameStart = True # Boolean to check if game should be restarted
+highScore = bin.keepScore.highScore # Store high score from file
 
 # Game Loop
 while True:
+  # Start game and initialize board
   if gameStart:
     startGame(gameBoard)
     gameStart = False
 
+  # Update high score in real time
   if score['score'] > highScore:
     highScore = score['score']
 
+  # Event checking loop
   for event in pygame.event.get():
     # If exit button is pressed, quit game
     if event.type == pygame.QUIT:
-      bin.keepScore.saveScore(score)
+      bin.keepScore.saveScore(score) # Save high score
       pygame.quit()
       sys.exit()
 
@@ -46,18 +49,20 @@ while True:
       # Display loss message
       hasWon(False)
 
+    # Logic to restart game after a loss or win
     if lost or won:
-      decision = getDecision(event)
+      # Get keyboard input
+      decision = getDecision()
       if decision:
-        if decision == 'space':
+        if decision == 'space': # Restart game on space press
           gameStart = True
           lost = False
           won = False
-        if decision == 'esc':
+        if decision == 'esc': # Exit game on esc press
           pygame.quit()
           sys.exit()
         bin.keepScore.saveScore(score)
-        reload(bin.keepScore)
+        reload(bin.keepScore) # Re-read high score file after saving
       
     
     # Obtain direction of button press

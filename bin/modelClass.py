@@ -2,7 +2,8 @@ from bin.cRectangle import cRectangle
 import random
 import math
 
-rectSize = rectWidth, rectHeight = 100, 100 # Size of each cell
+# Size of each cell
+rectSize = rectWidth, rectHeight = 100, 100
 
 # Number Colors
 colors = [
@@ -45,9 +46,9 @@ def spawnRect(gameBoard):
   # Call random on dict of not full x spaces
   x = random.choice(list(notFull.keys()))
 
-  # If x row exists, obtain random y from value pair
+  
   if notFull[x]:
-    y = random.choice(notFull[x])
+    y = random.choice(notFull[x]) # If x row exists, obtain random y from value pair
   else: # Just spawn in first entry of empty spaces
     y = notFull[0][0]
 
@@ -127,6 +128,7 @@ def mergeDir(dir, gameBoard, score):
           merged = True
   return merged
 
+# Helper function to merge based off of the input direction
 def merge(dir, gameBoard, x, y, score):
   merged = False
   if dir == 'l' or dir == 'u':
@@ -167,12 +169,15 @@ def incrementDir(dir, x, y):
   
 # Function to call all helper functions after a direction is pressed
 def handleKeypress(dir, gameBoard, score):
+  # Iterator to check if data of moves should be stored
   it = 1
+  # List of changes made by move function
   listMoves = {}
   moveBoard(dir, gameBoard, listMoves, it)
   merged = mergeDir(dir, gameBoard, score)
   it-=1
   moveBoard(dir, gameBoard, listMoves, it)
+  # Only spawn new cell if board moves or a merge happens
   if listMoves or merged: spawnRect(gameBoard)
   return listMoves
 

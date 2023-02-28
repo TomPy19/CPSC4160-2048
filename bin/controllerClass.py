@@ -1,5 +1,6 @@
 import pygame
 
+# Function to return which direction is being pressed in arrow keys
 def controls(event):
   keys = pygame.key.get_pressed()
   if event.type == pygame.KEYDOWN:
@@ -13,8 +14,9 @@ def controls(event):
       return 'd'
   else:
     return None
-  
-def getDecision(event):
+
+# Function to return if space or esc is pressed after game end
+def getDecision():
   keys = pygame.key.get_pressed()
   if keys[pygame.K_SPACE]:
     return 'space'
@@ -23,7 +25,7 @@ def getDecision(event):
   else:
     return None
 
-
+# Function to check if the directional keypress should move the board
 def shouldRun(state, dir):
   if dir == 'l':
     key = pygame.key.get_pressed()[pygame.K_LEFT]
@@ -36,6 +38,8 @@ def shouldRun(state, dir):
   else:
     return False
 
+  # Logic gate only returning true if the code has not already 
+  # run and key is being pressed
   if state and key:
     return False
   elif not state and key:
