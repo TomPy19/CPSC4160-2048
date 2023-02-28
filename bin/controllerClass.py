@@ -5,29 +5,40 @@ def controls(event):
   if event.type == pygame.KEYDOWN:
     if keys[pygame.K_LEFT]:
       return 'l'
-    if keys[pygame.K_RIGHT]:
+    elif keys[pygame.K_RIGHT]:
       return 'r'
-    if keys[pygame.K_UP]:
+    elif keys[pygame.K_UP]:
       return 'u'
-    if keys[pygame.K_DOWN]:
+    elif keys[pygame.K_DOWN]:
       return 'd'
   else:
     return None
+  
+def getDecision(event):
+  keys = pygame.key.get_pressed()
+  if keys[pygame.K_SPACE]:
+    return 'space'
+  elif keys[pygame.K_ESCAPE]:
+    return 'esc'
+  else:
+    return None
+
 
 def shouldRun(state, dir):
   if dir == 'l':
     key = pygame.key.get_pressed()[pygame.K_LEFT]
-  if dir == 'r':
+  elif dir == 'r':
     key = pygame.key.get_pressed()[pygame.K_RIGHT]
-  if dir == 'u':
+  elif dir == 'u':
     key = pygame.key.get_pressed()[pygame.K_UP]
-  if dir == 'd':
+  elif dir == 'd':
     key = pygame.key.get_pressed()[pygame.K_DOWN]
-    
+  else:
+    return False
+
   if state and key:
     return False
-  if not state and key:
+  elif not state and key:
     return True
-  if not state and not key:
+  elif not state and not key:
     return False
-  

@@ -1,5 +1,5 @@
 import pygame
-import time
+
 # Size of window
 SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = 500, 600
 rectWidth, rectHeight = 100, 100
@@ -18,7 +18,7 @@ pygame.init()
 surface = pygame.display.set_mode(SCREEN_SIZE)
 
 # Renderer called by game loop
-def render_loop(gameBoard):
+def render_loop(gameBoard,score,highScore):
 
   surface.fill(screenColor)
   pygame.draw.rect(surface, (45,36,26), pygame.Rect(0, 100, 500, 500),screenWidth, borderRadius)
@@ -27,7 +27,7 @@ def render_loop(gameBoard):
       rect = gameBoard[i][j]
       pygame.draw.rect(surface, rect.color, rect.rect,0,rectBorder)
       if rect.value is not 0:
-        numLabel = pygame.font.Font("ClearSans-Bold.ttf",60-(7*len(str(rect.value))))
+        numLabel = pygame.font.Font("bin/fonts/ClearSans-Bold.ttf",60-(7*len(str(rect.value))))
         surface.blit(
           numLabel.render(str(rect.value), 
           True, 
@@ -38,11 +38,12 @@ def render_loop(gameBoard):
         
     
   render_title()
+  render_scores(score['score'], highScore)
   pygame.display.update()
 
 #creating a Title
 def render_title():
-  font = pygame.font.Font("ClearSans-Bold.ttf",80)
+  font = pygame.font.Font("bin/fonts/ClearSans-Bold.ttf",70)
   title = font.render('2048',True,(0,0,0))
 
   surface.blit(title,(
@@ -50,7 +51,33 @@ def render_title():
     50 - (font.size('2048')[1] / 2)
     ))
   
-rectPos = rectX, rectY = 100, 100
+def render_scores(score,highScore):
+  titleFont = pygame.font.Font("bin/fonts/ClearSans-Bold.ttf",20)
+  scoreFont = pygame.font.Font("bin/fonts/ClearSans-Regular.ttf",20)
+
+  scoreLabel = titleFont.render('Score:',True,(0,0,0))
+  highScoreLabel = titleFont.render('High Score:',True,(0,0,0))
+
+  scoreText = scoreFont.render(str(score),True,(0,0,0))
+  highScoreText = scoreFont.render(str(highScore),True,(0,0,0))
+
+  surface.blit(scoreLabel,(
+    20,
+    95 - (titleFont.size('Score')[1]+scoreFont.size(str(score))[1])+5
+    ))
+  surface.blit(highScoreLabel,(
+    500 - (20+titleFont.size('High Score')[0]),
+    95 - (titleFont.size('High Score')[1]+scoreFont.size(str(highScore))[1])+5
+    ))
+  surface.blit(scoreText,(
+    20,
+    95 - (scoreFont.size(str(score))[1])
+    ))
+  surface.blit(highScoreText,(
+    500 - (20+scoreFont.size(str(highScore))[0]),
+    95 - (scoreFont.size(str(highScore))[1])
+    ))
+
 
 #Movement animation
 def slide(test):
@@ -74,7 +101,7 @@ def slide(test):
       rect = pygame.Rect(xi, yi, 100, 100)
       pygame.draw.rect(surface, test[str(entry)][dir][0].color, rect, 0, rectBorder)
       if test[str(entry)][dir][0].value != 0:
-        numLabel = pygame.font.Font("ClearSans-Bold.ttf",60-(7*len(str(test[str(entry)][dir][0].value))))
+        numLabel = pygame.font.Font("bin/fonts/ClearSans-Bold.ttf",60-(7*len(str(test[str(entry)][dir][0].value))))
         surface.blit(
           numLabel.render(str(test[str(entry)][dir][0].value), 
           True, 
@@ -94,16 +121,29 @@ def slide(test):
 def hasWon(win):
   rect = pygame.Rect(SCREEN_WIDTH/4, SCREEN_HEIGHT/2 - 50, 250, 100)
   pygame.draw.rect(surface, (210, 195, 179), rect, 0, rectBorder)
-  font = pygame.font.Font("ClearSans-Bold.ttf",50)
+  font = pygame.font.Font("bin/fonts/ClearSans-Bold.ttf",45)
+  font2 = pygame.font.Font("bin/fonts/ClearSans-Regular.ttf",20)
+  winText = 'You Win!'
+  loseText = 'You Lose!'
+  replayText = 'Space: replay, ESC: exit'
+  replay = font2.render(replayText,True,(0,0,0))
+  messageText = ''
   
   if win == True:
-    message = font.render('You Win!',True,(0,0,0))
+    message = font.render(winText,True,(0,0,0))
+    messageText = winText
   else:
-    message = font.render('You Lose!',True,(0,0,0))
-
-  surface.blit(message,(rect.x + 20, rect.y + 15) 
-  )
+    message = font.render(loseText,True,(0,0,0))
+    messageText = loseText
+  
+  surface.blit(message,(rect.x + (rect.width/2)  - (font.size(messageText)[0]/2), 
+                        rect.y + (rect.height/2) - (font.size(messageText)[1] + font2.size(replayText)[1])/2 + 3))
+  surface.blit(replay, (rect.x + (rect.width/2)  - (font2.size(replayText)[0]/2) ,
+                        rect.y + (rect.height/2) - (font.size(messageText)[1] + font2.size(replayText)[1])/2 + font.size(messageText)[1] - 3))
+  
   pygame.display.update()
+
+
     
       
   
