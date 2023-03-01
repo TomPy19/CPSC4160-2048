@@ -20,8 +20,10 @@
 
 
 
+### How to Play
+**1**: Run main.py
 
-
+**2**: Play by using arrow keys
 **Program Versions**
 
 OS Version: Windows 10, MacOS M1 Ventura 13.2
@@ -50,8 +52,3 @@ Game engine wise, the game loop became a bit cluttered with various other logic,
 **Entities (Things)**: 
 
 **Player Character**: Instead of a player character, It is more so that the player controls the board and moves the objects of the game board.
-
-### How to Play
-**1**: Run main.py
-
-**2**: Play by using arrow keys
