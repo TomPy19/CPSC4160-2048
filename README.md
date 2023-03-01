@@ -1,6 +1,7 @@
 ﻿### The Game Document (README)
 **Game Image:**
 
+![](./2048.png)
 
 
 
@@ -37,6 +38,7 @@ Pygame Version: 2.1.3
 
 **Image**:
 
+![](./relationships.png)
 **Future Work**:
 
 Game engine wise, the game loop became a bit cluttered with various other logic, so possibly finding another way to refine it and have more abstraction would be a consideration. As far as new features are concerned, there are not many additional ones that could be added since 2048 is so bare bones. However, implementing some animations and further polishing the already miniscule amount of graphics of the game is a possible path. 
