@@ -21,9 +21,10 @@
 
 
 ### How to Play
-**1**: Run main.py
+1. Run main.py
 
-**2**: Play by using arrow keys
+2. Play by using arrow keys
+
 **Program Versions**
 
 OS Version: Windows 10, MacOS M1 Ventura 13.2
