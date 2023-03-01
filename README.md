@@ -51,3 +51,6 @@ Game engine wise, the game loop became a bit cluttered with various other logic,
 
 **Player Character**: Instead of a player character, It is more so that the player controls the board and moves the objects of the game board.
 
+### How to Play
+**1**: Run main.py
+**2**: Play by using arrow keys
