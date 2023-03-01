@@ -19,8 +19,11 @@
 
 
 
+**Members**
 
-### How to Play
+Evan Sok, Thomas Personett
+
+**How to Play**
 1. Run main.py
 
 2. Play by using arrow keys
@@ -53,9 +56,7 @@ Game engine wise, the game loop became a bit cluttered with various other logic,
 **Generalization**:
 
 Our game loop is generalizable enough that, with minor modifications, should be able to work for most simple games. It contains an initial game state, score tracker and in the event loop, it checks for win/loss, key presses, and displays the game. 
-### Game Components
+
 **Deviations:**
 
-  **Entities (Things)**: 
-
-  **Player Character**: Instead of a player character, It is more so that the player controls the board and moves the objects of the game board.
+Player Character: Instead of a player character, It is more so that the player controls the board and moves the objects of the game board.
