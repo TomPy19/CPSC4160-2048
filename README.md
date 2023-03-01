@@ -53,4 +53,5 @@ Game engine wise, the game loop became a bit cluttered with various other logic,
 
 ### How to Play
 **1**: Run main.py
+
 **2**: Play by using arrow keys
